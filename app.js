@@ -98,8 +98,27 @@ const courses = [
 ];
 
 app.get("/get-courses", (req, res) => {
-    res.status(200).json({
+   return res.status(200).json({
         courses,
+    });
+});
+app.get("/get-course/:id", (req, res) => {
+    const { id } = req.params;
+
+    const course = courses.find(
+        (course) => course.id === Number(id)
+    );
+
+    if (!course) {
+        return res.status(404).json({
+           
+            message: "Course not found",
+        });
+    }
+
+    return res.status(200).json({
+        
+        course,
     });
 });
 
